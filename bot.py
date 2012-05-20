@@ -36,9 +36,11 @@ class Phenny(irc.Bot):
       if not hasattr(self.config, 'enable'): 
          for fn in os.listdir(os.path.join(home, 'modules')): 
             if fn.endswith('.py') and not fn.startswith('_'): 
+               print "check %s" % fn
                filenames.append(os.path.join(home, 'modules', fn))
       else: 
          for fn in self.config.enable: 
+            print "check2 %s" % fn
             filenames.append(os.path.join(home, 'modules', fn + '.py'))
 
       if hasattr(self.config, 'extra'): 
@@ -54,6 +56,7 @@ class Phenny(irc.Bot):
       excluded_modules = getattr(self.config, 'exclude', [])
       for filename in filenames: 
          name = os.path.basename(filename)[:-3]
+         print "check3 %s" % filename
          if name in excluded_modules: continue
          # if name in sys.modules: 
          #    del sys.modules[name]
@@ -64,6 +67,7 @@ class Phenny(irc.Bot):
             if hasattr(module, 'setup'): 
                module.setup(self)
             self.register(vars(module))
+            print "check module %s" % name
             modules.append(name)
 
       if modules: 

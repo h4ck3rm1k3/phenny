@@ -136,6 +136,8 @@ def main(argv=None):
       module = imp.load_source(name, config_name)
       module.filename = config_name
 
+      print "check module %s" % module
+
       if not hasattr(module, 'prefix'): 
          module.prefix = r'\.'
 
