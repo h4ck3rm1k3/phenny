@@ -1,4 +1,22 @@
+import sys
+import site
+import os
+
 # job scheduler for phenny
+pwd = os.path.dirname(os.path.abspath(__file__))
+#print os.environ['PYTHONPATH']
+#print sys.path
+os.environ['PYTHONPATH'] = pwd + "/../fosm" 
+sys.path = sys.path + [pwd] + ["%s/../fosm" % pwd]
+#print sys.path
+#print os.environ['PYTHONPATH']
+os.environ['DJANGO_SETTINGS_MODULE'] = 'fosm.settings'
+#from django.conf import settings
+#settings.DEBUG = True   # Don't do this!
+from django.db import models
+from fosm_tasks.models import Project
+all_projects = Project.objects.all()
+print all_projects
 
 # low ^\.(hire)(?: +(.*))?$ <function hire at 0x7fefc9dbdd70>
 # register worker
